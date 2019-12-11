@@ -1,0 +1,9 @@
+{
+  "name": "product-catalog",
+  "description": "",
+  "repository": "",
+  "dependencies": {
+    "@sap/cds": "latest",
+    "express": "*"
+  }
+}
