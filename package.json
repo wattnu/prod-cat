@@ -5,5 +5,19 @@
   "dependencies": {
     "@sap/cds": "latest",
     "express": "*"
+  },
+  "devDependencies": {
+    "sqlite3": "^4.1.1"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": [
+          "db/",
+          "srv/"
+        ]
+      }
+    }
   }
 }
