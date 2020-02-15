@@ -1,4 +1,4 @@
-namespace common;
+namespace my.common;
 using {Country} from '@sap/cds/common';
 
 aspect Address {

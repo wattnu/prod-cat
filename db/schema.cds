@@ -1,5 +1,5 @@
 using {cuid, managed, Currency} from '@sap/cds/common';
-using common.Address from './common';
+using my.common.Address from './common';
 
 namespace db;
 
