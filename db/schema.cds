@@ -1,7 +1,7 @@
 using {cuid, managed, Currency} from '@sap/cds/common';
 using my.common.Address from './common';
 
-namespace db;
+namespace my.domain;
 
 entity Products : managed {
   key ID       : Integer;

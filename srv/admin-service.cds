@@ -1,9 +1,9 @@
-using db from '../db/schema';
+using my.domain from '../db/schema';
 
 service AdminService @(_requires : 'admin') {
-  entity Products as projection on db.Products;
-  entity Suppliers as projection on db.Suppliers;
-  entity Orders as projection on db.Orders;
+  entity Products as projection on domain.Products;
+  entity Suppliers as projection on domain.Suppliers
+  entity Orders as projection on domain.Orders;
 }
 
 annotate AdminService.Products with @(
