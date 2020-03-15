@@ -5,10 +5,11 @@ namespace my.domain;
 
 entity Products : managed {
   key ID       : Integer;
-      name     : localized String(100) @title : '{i18n>productName}'; //> readable key
-      stock    : Integer;
+      name     : localized String(100) not null @title : '{i18n>productName}'; 
+      stock    : Integer @title : '{i18n>stock}';
       price    : Decimal(9, 2) @title : '{i18n>price}';
       retail   : Decimal(9, 2) @title : '{i18n>retail}';
+      virtual margin : Decimal(9, 2) @title:'{i18n>margin}'; 
       currency : Currency;
       supplier : Association to Suppliers;
 }
@@ -22,10 +23,9 @@ entity Suppliers : managed, Address {
 entity Orders : managed {
   key ID       : UUID;
       orderNo  : String         @title : '{i18n>orderNo}'; //> readable key
-      supplier : Association to Suppliers;
-      Items    : Composition of many OrderItems on Items.parent = $self;
       total    : Decimal(9, 2)  @readonly;
       currency : Currency;
+      Items    : Composition of many OrderItems on Items.parent = $self;
 }
 
 entity OrderItems {
