@@ -1,10 +1,10 @@
 /*
    Implementations for CatalogService
 */
-   module.exports = (srv) => {
+module.exports = (srv) => {
 
   // Use reflection to get the definition of Products
-  const { Products} = cds.entities
+  const { Products } = cds.entities
 
   srv.before('CREATE', 'Orders', async (req) => {
     // Check for sufficient stock

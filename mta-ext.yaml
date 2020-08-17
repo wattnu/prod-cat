@@ -1,0 +1,22 @@
+_schema-version: 3.1
+ID: prod-cat-ext1
+extends: prod-cat  # MTA to extend
+
+modules:
+- name: prod-cat-app   # change this module
+  parameters:
+    memory: 256M             # overwrite memory
+    host: ${default-host}    # overwrite route
+    app-name: test-app       # use a different name
+
+resources:
+- name: prod-cat-xsuaa
+  parameters:
+    service-name: test-xsuaa     # use a different name
+    config:
+      xsappname: test-cat        # name of OAuth-client must be different
+      role-collections:
+      - name: test-manager       # name of role collection must be different
+        role-template-references: 
+        - $XSAPPNAME.Administrator
+        - $XSAPPNAME.Shopper

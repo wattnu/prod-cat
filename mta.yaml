@@ -1,0 +1,64 @@
+_schema-version: '3.1'
+ID: prod-cat
+version: 1.0.0
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install --production
+    - npx -p @sap/cds-dk cds build --production
+modules:
+ ##### ---------  DATABASE MODULE  -------------------
+- name: prod-cat-db
+  type: hdb
+  path: gen/db  
+  requires:
+    ## required resources to bind
+  - name: prod-cat-db-hdi-container
+  ##### --------  CAP-SERVER MODULE  -----------------
+- name: prod-cat-srv
+  type: nodejs
+  path: gen/srv
+  parameters:
+    memory: 256M 
+  requires:
+    ## required resources to bind
+  - name: prod-cat-db-hdi-container
+  - name: prod-cat-xsuaa
+  provides:
+    ## required by consumers of CAP services (e.g. approuter)
+  - name: srv-binding      
+    properties:
+      srv-url: ${default-url}
+  ##### -----  FRONTEND MODULE (APPROUTER)  --------
+- name: prod-cat-app
+  type: nodejs
+  path: app
+  parameters:
+    host:   prod-cat-${org}-${space}
+    memory: 128M 
+  requires:
+    ## required resources to bind
+  - name: prod-cat-xsuaa
+  - name: srv-binding
+    properties:
+      destinations:
+      - name: backend
+        url: ~{srv-url}
+        forwardAuthToken: true      
+resources:
+ #####  SAP HANA Schemas & HDI Containers Service Instance
+- name: prod-cat-db-hdi-container
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hanatrial  # only on trial landscapes
+  #### SAP Authorization & Trust Management Service Instance
+- name: prod-cat-xsuaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: xsuaa
+    service-plan: application
+    # path to xs-security.json to add roles and scopes
+    path: ./xs-security.json

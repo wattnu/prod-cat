@@ -1,0 +1,9 @@
+---
+applications:
+- name: prod-cat-db    
+  path: ../../gen/db
+  no-route: true
+  health-check-type: process
+  memory: 128M
+  services:
+  - prod-cat-db-hdi-container

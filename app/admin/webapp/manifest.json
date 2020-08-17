@@ -1,0 +1,71 @@
+{   "_version": "1.15.0",
+    "sap.app": {
+        "id": "admin",
+        "type": "application",
+        "title": "Product Catalog",
+        "description": "For Administators",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "AdminService": {
+                "uri": "/cap/admin/",
+                "type": "OData",
+                "settings": {"odataVersion": "4.0"}
+        } },
+        "sourceTemplate": {
+            "id": "ui5template.fiorielements.v4.lrop",
+            "version": "1.0.0"
+    } },
+    "sap.ui5": {
+        "dependencies": {"libs": {"sap.fe.templates": {}
+    } },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "AdminService",
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect" : true,
+                    "earlyRequests": true
+        } } },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "ProductsList",
+                    "target": "ProductsList"
+                },{
+                    "pattern": "Products({key})",
+                    "name": "ProductsDetails",
+                    "target": "ProductsDetails"
+                } ],
+            "targets": {
+                "ProductsList": {
+                    "type": "Component",
+                    "id": "ProductsList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": { "settings" : {
+                        "entitySet" : "Products",
+                        "navigation" : {
+                        "Products" : {
+                            "detail" : {
+                                "route" : "ProductsDetails"
+                } } } } } },
+                "ProductsDetails": {
+                    "type": "Component",
+                    "id": "ProductsDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {  "settings" : {
+                        "entitySet" : "Products",
+                        "editableHeaderContent": false
+        } } } } },
+        "contentDensities": {"compact": true, "cozy": true} },
+    "sap.ui": { "technology": "UI5" },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "xsappname": "prod-cat",
+    "tenant-mode": "dedicated",
+    "scopes": [
+        {
+            "name": "$XSAPPNAME.admin",
+            "description": "Administration"
+        },
+        {
+            "name": "$XSAPPNAME.shop",
+            "description": "Shopping"
+        }
+    ],
+    "role-templates": [
+        {
+            "name": "Administrator",
+            "description": "Manage all data",
+            "default-role-name": "Administrator",
+            "scope-references": [
+                "$XSAPPNAME.admin"
+            ]
+        },
+        {
+            "name": "Shopper",
+            "description": "Browse and buy",
+            "default-role-name": "Shopper",
+            "scope-references": [
+                "$XSAPPNAME.shop"
+            ]
+        }
+    ],
+    "role-collections": [
+        {
+            "name": "Manager",
+            "description": "All functions",
+            "role-template-references": [
+                "$XSAPPNAME.Administrator",
+                "$XSAPPNAME.Shopper"
+            ]
+        }
+    ],
+    "oauth2-configuration": {
+        "token-validity": 900,
+        "refresh-token-validity": 1800
+    }
+}

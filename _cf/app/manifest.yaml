@@ -1,0 +1,19 @@
+---
+applications:
+- name: prod-cat-app
+  path: ../../app
+  memory: 128M
+  routes: 
+  - route: ((prefix))-prod-cat-app.((domain))
+  env:
+    destinations: >
+      [ 
+        {
+          "name":"backend",
+          "url":"https://((prefix))-prod-cat-srv.((domain))",  
+          "forwardAuthToken": true
+        } 
+      ]
+  services:
+  - prod-cat-db-hdi-container
+  - prod-cat-xsuaa

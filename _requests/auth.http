@@ -33,6 +33,10 @@ Authorization: Basic Donald:duck
   ]
 }
 
+### Read Shop-Products for 'authenticated-user'
+GET http://localhost:4004/shop/Products
+Authorization: Basic Dagobert:trick
+
 ### Read Shop-Orders for 'authenticated-user'
 GET http://localhost:4004/shop/Orders
 Authorization: Basic Dagobert:trick

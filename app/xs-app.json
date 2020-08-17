@@ -1,0 +1,15 @@
+{
+    "welcomeFile": "index.html",
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "^/cap/(.*)$",
+            "target": "/$1",
+            "destination": "backend"
+        },
+        {
+            "source": "^(.*)$",
+            "localDir": "."
+        }
+    ]
+}

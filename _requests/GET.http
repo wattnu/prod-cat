@@ -28,5 +28,5 @@ GET http://localhost:4004/admin/Suppliers/$count
 ### Read all Suppliers and show number of Suppliers in @odata.count
 GET http://localhost:4004/admin/Suppliers?$count=true
 
-### Read all Orders
+### Read all OrderItems (should fail)
 GET http://localhost:4004/admin/OrderItems

@@ -3,22 +3,25 @@
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
-    "@sap/cds": "^3.31.2",
+    "@sap/cds": "^4",
+    "@sap/xsenv": "^2.2.0",
+    "@sap/xssec": "^2",
     "express": "^4",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "@sap/hana-client": "^2.4.196"
   },
   "scripts": {
     "start": "npx cds run"
   },
   "devDependencies": {
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^4"
   },
   "cds": {
     "auth": {
       "passport": {
-        "strategy": "mock",
+        "strategy": "JWT",
         "users": {
           "Donald": {
             "password": "duck",
@@ -34,6 +37,17 @@
           }
         }
       }
+    },
+    "requires": {
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "db": {
+        "kind": "hana"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
     }
   }
 }

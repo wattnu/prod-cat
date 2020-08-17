@@ -1,0 +1,10 @@
+---
+applications:
+- name: prod-cat-srv
+  path: ../../gen/srv
+  memory: 128M
+  routes: 
+  - route: ((prefix))-prod-cat-srv.((domain))
+  services:
+  - prod-cat-db-hdi-container
+  - prod-cat-xsuaa

@@ -1,7 +1,7 @@
 using {managed, Currency} from '@sap/cds/common';
-using my.common.Address from './common';
+using {my.common.Address} from './common';
 
-namespace my.domain;
+namespace my.domain; 
 
 entity Products : managed {
   key ID             : Integer;
@@ -18,19 +18,22 @@ entity Suppliers : managed, Address {
   key ID       : Integer;
       name     : String(100) @title : '{i18n>supplierName}';
       priority : Integer     @title : '{i18n>priority}';
-      products : Association to many Products on products.supplier = $self;
+      products : Association to many Products
+                   on products.supplier = $self;
 }
 
 entity Orders : managed {
   key ID       : UUID;
-      orderNo  : String @title : '{i18n>orderNumber}'; 
+      orderNo  : String @title : '{i18n>orderNumber}';
       currency : Currency;
-      Items    : Composition of many OrderItems on Items.parent = $self;
+      Items    : Composition of many OrderItems
+                   on Items.parent = $self;
 }
 
 entity OrderItems {
-  key ID        : UUID;
-      parent    : Association to Orders;
-      product   : Association to Products;
-      amount    : Integer @title : '{i18n>orderAmount}';
+  key ID      : UUID;
+      parent  : Association to Orders;
+      product : Association to Products;
+      amount  : Integer @title : '{i18n>orderAmount}';
 }
+
